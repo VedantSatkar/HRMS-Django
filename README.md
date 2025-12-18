@@ -77,7 +77,7 @@ It was built with **practical use, clean UI, secure access control**, and **real
 
 | Dashboard | Employees |
 |-----------|-----------|
-| ![Dashboard](images/dashboard.png) | ![Employees](images/employees.png) |
+| ![HRMS Dashboard](images/dashboard.png) | ![Employees](images/employees.png) |
 
 | Attendance | Payroll |
 |------------|---------|
