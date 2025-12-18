@@ -72,10 +72,6 @@ It was built with **practical use, clean UI, secure access control**, and **real
 
 ---
 
----
-
-## 🖼 Screenshots
-
 ## 🖼 Screenshots
 
 <table>
