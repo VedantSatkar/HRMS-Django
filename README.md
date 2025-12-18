@@ -66,22 +66,27 @@ It was built with **practical use, clean UI, secure access control**, and **real
 - Read / Unread tracking
 ---
 ### 📊 Central Dashboard
-![HRMS](images/dashboard%201.png)
 - Total Employees
 - Present / Absent today
 - Quick links to all modules
 
 ---
 
+---
+
 ## 🖼 Screenshots
 
-| Dashboard | Employees |
-|-----------|-----------|
-| ![HRMS Dashboard](images/dashboard.png) | ![Employees](images/employees.png) |
+### 📊 Dashboard
+![Dashboard](images/dashboard.png)
 
-| Attendance | Payroll |
-|------------|---------|
-| ![Attendance](images/attendance.png) | ![Payroll](images/payroll.png) |
+### 👥 Employees
+![Employees](images/employees.png)
+
+### 🕒 Attendance
+![Attendance](images/attendance.png)
+
+### 💰 Payroll
+![Payroll](images/payroll.png)
 
 ---
 
