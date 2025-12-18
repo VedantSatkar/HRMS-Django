@@ -76,8 +76,36 @@ It was built with **practical use, clean UI, secure access control**, and **real
 
 ## 🖼 Screenshots
 
+## 🖼 Screenshots
 
-| Dashboard | Employees | |-----------|-----------| | ![HRMS Dashboard](images/dashboard.png) | ![Employees](images/employees.png) | | Attendance | Payroll | |------------|---------| | ![Attendance](images/attendance.png) | ![Payroll](images/payroll.png) |
+<table>
+  <tr>
+    <th>Dashboard</th>
+    <th>Employees</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/dashboard.png" width="420"/>
+    </td>
+    <td>
+      <img src="images/employees.png" width="420"/>
+    </td>
+  </tr>
+  <tr>
+    <th>Attendance</th>
+    <th>Payroll</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/attendance.png" width="420"/>
+    </td>
+    <td>
+      <img src="images/payroll.png" width="420"/>
+    </td>
+  </tr>
+</table>
+
+
 
 ---
 
