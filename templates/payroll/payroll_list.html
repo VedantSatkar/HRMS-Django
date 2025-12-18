@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="text-white mb-0"><i class="fas fa-money-bill-wave me-2"></i>Payroll Management</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'payroll:add_payroll' %}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Add Payroll
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-0">
+            {% if payrolls %}
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-muted">Employee</th>
+                                <th class="text-muted">Salary</th>
+                                <th class="text-muted">Bonus</th>
+                                <th class="text-muted">Deductions</th>
+                                <th class="text-muted">Period</th>
+                                <th class="text-muted">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payroll in payrolls %}
+                            <tr>
+                                <td class="fw-500">{{ payroll.employee.name }}</td>
+                                <td><span class="badge bg-primary">$ {{ payroll.salary }}</span></td>
+                                <td><span class="badge bg-success">{{ payroll.bonus }}</span></td>
+                                <td><span class="badge bg-danger">{{ payroll.deductions }}</span></td>
+                                <td>{{ payroll.month }}/{{ payroll.year }}</td>
+                                <td>
+                                    <a href="{% url 'payroll:edit_payroll' payroll.id %}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'payroll:delete_payroll' payroll.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3" style="opacity: 0.5;"></i>
+                    <p class="text-muted">No payroll records found. <a href="{% url 'payroll:add_payroll' %}">Add one</a></p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-briefcase"></i> HRMS
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employees/"><i class="fas fa-users"></i> Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/attendance/"><i class="fas fa-calendar-check"></i> Attendance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/payroll/"><i class="fas fa-money-bill"></i> Payroll</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/leave/"><i class="fas fa-calendar-times"></i> Leave</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/notification/"><i class="fas fa-bell"></i> Notifications</a>
+                </li>
+                {% if user.is_staff or user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/"><i class="fas fa-cog"></i> Admin</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <form method="post" action="{% url 'logout' %}" style="display:inline; margin-left: 10px;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

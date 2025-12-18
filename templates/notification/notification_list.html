@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <!-- Header -->
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <h1 class="mb-0" style="font-size: 2.5rem; font-weight: 700;">
+                <i class="fas fa-bell" style="color: #667eea;"></i> Notifications
+            </h1>
+            <p class="text-muted mt-2">Manage and track all system notifications</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'notification:add_notification' %}" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                <i class="fas fa-plus me-2"></i>Send Notification
+            </a>
+        </div>
+    </div>
+
+    {% if notifications %}
+    <!-- Notifications List -->
+    <div class="row">
+        {% for notification in notifications %}
+        <div class="col-12 mb-4">
+            <div class="card shadow-sm border-0" style="transition: all 0.3s ease;">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <!-- Status Icon -->
+                            <div class="mb-3">
+                                {% if notification.is_read %}
+                                    <span class="badge bg-success" style="padding: 8px 12px; font-size: 12px;">
+                                        <i class="fas fa-check-circle me-1"></i>Read
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-warning" style="padding: 8px 12px; font-size: 12px;">
+                                        <i class="fas fa-circle me-1"></i>Unread
+                                    </span>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Title -->
+                            <h5 class="fw-700 mb-2" style="color: #333;">{{ notification.title }}</h5>
+                            
+                            <!-- Message -->
+                            <p class="text-muted mb-3">{{ notification.message }}</p>
+                            
+                            <!-- Meta Info -->
+                            <div class="row text-muted small">
+                                <div class="col-auto">
+                                    <i class="fas fa-user me-1"></i>
+                                    <strong>To:</strong> {{ notification.recipient.name|default:"System Admin" }}
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    {{ notification.notification_date|date:"M d, Y at H:i" }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="col-md-4 text-end">
+                            <a href="{% url 'notification:edit_notification' notification.id %}" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'notification:delete_notification' notification.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this notification?');">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <!-- Empty State -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm border-0 text-center py-5">
+                <div class="card-body">
+                    <i class="fas fa-inbox fa-4x mb-4" style="color: #ddd; opacity: 0.6;"></i>
+                    <h5 class="text-muted mb-3">No Notifications Yet</h5>
+                    <p class="text-muted mb-4">Start by creating your first notification to keep your team informed.</p>
+                    <a href="{% url 'notification:add_notification' %}" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Create First Notification
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .fw-700 {
+        font-weight: 700;
+    }
+</style>
+{% endblock %}

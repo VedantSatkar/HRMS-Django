@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+
+{% block title %}HRMS Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="page-title"><i class="fas fa-chart-line"></i> HRMS Dashboard</h1>
+    </div>
+</div>
+
+<!-- Stats Cards Row -->
+<div class="row g-4 mb-5">
+    <!-- Total Employees Card -->
+    <div class="col-md-4">
+        <div class="card text-center" style="border-left: 5px solid #667eea;">
+            <div class="card-body py-4">
+                <div style="font-size: 40px; color: #667eea; margin-bottom: 10px;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 style="color: #667eea; font-weight: 700; margin: 10px 0;">{{ total_employees }}</h3>
+                <p class="text-muted mb-0" style="font-size: 16px;">Total Employees</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Present Today Card -->
+    <div class="col-md-4">
+        <div class="card text-center" style="border-left: 5px solid #10b981;">
+            <div class="card-body py-4">
+                <div style="font-size: 40px; color: #10b981; margin-bottom: 10px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="color: #10b981; font-weight: 700; margin: 10px 0;">{{ present_today }}</h3>
+                <p class="text-muted mb-0" style="font-size: 16px;">Present Today</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Absent Today Card -->
+    <div class="col-md-4">
+        <div class="card text-center" style="border-left: 5px solid #f5576c;">
+            <div class="card-body py-4">
+                <div style="font-size: 40px; color: #f5576c; margin-bottom: 10px;">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <h3 style="color: #f5576c; font-weight: 700; margin: 10px 0;">{{ absent_today }}</h3>
+                <p class="text-muted mb-0" style="font-size: 16px;">Absent Today</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Links Section -->
+<div class="row">
+    <div class="col-12">
+        <h4 style="color: #fff; margin-bottom: 20px; font-weight: 700;">
+            <i class="fas fa-link"></i> Quick Links
+        </h4>
+    </div>
+</div>
+
+<div class="row g-3 mb-5">
+    <div class="col-md-6 col-lg-3">
+        <a href="/employees/" class="text-decoration-none">
+            <div class="card text-center h-100" style="transition: all 0.3s ease;">
+                <div class="card-body">
+                    <i class="fas fa-briefcase" style="font-size: 32px; color: #667eea; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Employees</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <a href="/attendance/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-calendar-check" style="font-size: 32px; color: #10b981; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Attendance</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <a href="/payroll/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-money-bill" style="font-size: 32px; color: #f59e0b; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Payroll</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <a href="/leave/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-calendar-times" style="font-size: 32px; color: #8b5cf6; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Leave</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <a href="/performance/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-chart-bar" style="font-size: 32px; color: #3b82f6; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Performance</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <a href="/recruitment/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-user-tie" style="font-size: 32px; color: #ec4899; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Recruitment</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <a href="/task/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-tasks" style="font-size: 32px; color: #06b6d4; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Tasks</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {% if user.is_staff or user.is_superuser %}
+    <div class="col-md-6 col-lg-3">
+        <a href="/admin/" class="text-decoration-none">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-cog" style="font-size: 32px; color: #6366f1; margin-bottom: 10px;"></i>
+                    <p class="fw-600 mt-2" style="color: #333;">Admin Panel</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Notifications Widget -->
+<div class="row mt-5">
+    <div class="col-12">
+        <h4 style="color: #fff; margin-bottom: 20px; font-weight: 700;">
+            <i class="fas fa-bell"></i> Recent Notifications
+        </h4>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card shadow-lg border-0">
+            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 0.5rem 0.5rem 0 0;">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h5 class="mb-0"><i class="fas fa-envelope-open-text"></i> Latest Alerts</h5>
+                    </div>
+                    <div class="col-auto">
+                        {% if unread_notifications > 0 %}
+                        <span class="badge bg-warning">{{ unread_notifications }} Unread</span>
+                        {% endif %}
+                        <a href="/notification/" class="btn btn-sm btn-light">View All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if recent_notifications %}
+                <div class="list-group list-group-flush">
+                    {% for notification in recent_notifications %}
+                    <div class="list-group-item px-0 py-3 border-bottom">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="mb-1">
+                                    {% if notification.is_read %}
+                                    <i class="fas fa-check-circle" style="color: #10b981;"></i>
+                                    {% else %}
+                                    <i class="fas fa-circle" style="color: #f59e0b;"></i>
+                                    {% endif %}
+                                    {{ notification.title }}
+                                </h6>
+                                <p class="text-muted mb-0 small">{{ notification.message|truncatewords:15 }}</p>
+                                <small class="text-muted">
+                                    <i class="fas fa-user"></i> {{ notification.recipient.name|default:"Admin" }} • 
+                                    {{ notification.notification_date|date:"M d, Y H:i" }}
+                                </small>
+                            </div>
+                            <div class="col-auto">
+                                <a href="/notification/edit/{{ notification.id }}/" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-inbox fa-2x text-muted mb-3" style="opacity: 0.5;"></i>
+                    <p class="text-muted">No notifications yet</p>
+                    <a href="/notification/add/" class="btn btn-sm btn-primary">Create Notification</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    a .card {
+        border: none;
+    }
+
+    a .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .fw-600 {
+        font-weight: 600;
+        font-size: 16px;
+    }
+</style>
+
+{% endblock %}

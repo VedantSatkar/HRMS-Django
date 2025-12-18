@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <!-- Messages -->
+    {% if messages %}
+        {% for message in messages %}
+        <div data-notification="{% if message.tags %}{{ message.tags }}{% else %}info{% endif %}" style="display: none;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <!-- Card with Gradient Header -->
+            <div class="card shadow-lg border-0" style="overflow: hidden;">
+                <!-- Gradient Header -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; color: white;">
+                    <h3 class="mb-0">
+                        <i class="fas fa-bell"></i> Send New Notification
+                    </h3>
+                    <p class="mb-0 mt-2" style="opacity: 0.9; font-size: 14px;">Create and send a notification to team members</p>
+                </div>
+
+                <!-- Form Body -->
+                <div class="card-body p-5">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Title Field -->
+                        <div class="mb-4">
+                            <label for="{{ form.title.id_for_label }}" class="form-label fw-600" style="color: #333;">
+                                <i class="fas fa-heading" style="color: #667eea;"></i> Notification Title
+                            </label>
+                            {{ form.title }}
+                            <small class="text-muted d-block mt-2">Brief subject of the notification</small>
+                            {% if form.title.errors %}
+                                <div class="alert alert-danger alert-sm mt-2">{{ form.title.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Recipient Field -->
+                        <div class="mb-4">
+                            <label for="{{ form.recipient.id_for_label }}" class="form-label fw-600" style="color: #333;">
+                                <i class="fas fa-user" style="color: #667eea;"></i> Recipient
+                            </label>
+                            {{ form.recipient }}
+                            <small class="text-muted d-block mt-2">Select which employee should receive this notification</small>
+                            {% if form.recipient.errors %}
+                                <div class="alert alert-danger alert-sm mt-2">{{ form.recipient.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="mb-4">
+                            <label for="{{ form.message.id_for_label }}" class="form-label fw-600" style="color: #333;">
+                                <i class="fas fa-message" style="color: #667eea;"></i> Message
+                            </label>
+                            {{ form.message }}
+                            <small class="text-muted d-block mt-2">Detailed notification message (supports longer text)</small>
+                            {% if form.message.errors %}
+                                <div class="alert alert-danger alert-sm mt-2">{{ form.message.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Is Read Checkbox -->
+                        <div class="mb-4">
+                            <div class="form-check">
+                                {{ form.is_read }}
+                                <label class="form-check-label" for="{{ form.is_read.id_for_label }}">
+                                    <i class="fas fa-check-circle" style="color: #667eea;"></i> Mark as Read
+                                </label>
+                            </div>
+                            <small class="text-muted d-block mt-2">Check this if the notification has already been viewed</small>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-grid gap-2 pt-3">
+                            <button type="submit" class="btn btn-lg btn-primary" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; font-weight: 600;">
+                                <i class="fas fa-paper-plane me-2"></i>Send Notification
+                            </button>
+                            <a href="{% url 'notification:notification_list' %}" class="btn btn-lg btn-outline-secondary" style="font-weight: 600;">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="alert alert-info mt-4" style="border-left: 4px solid #3b82f6;">
+                <h6 class="mb-2">
+                    <i class="fas fa-info-circle me-2"></i> Tips
+                </h6>
+                <ul class="mb-0 small">
+                    <li>Keep notification titles concise and descriptive</li>
+                    <li>Messages support longer text for detailed information</li>
+                    <li>Select a recipient to target the notification to a specific employee</li>
+                    <li>Leave recipient blank to send to all users</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 2px solid #e5e7eb;
+        padding: 10px 15px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .alert-sm {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .fw-600 {
+        font-weight: 600;
+    }
+</style>
+{% endblock %}

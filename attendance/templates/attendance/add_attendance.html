@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Mark Attendance</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.employee.label_tag }}
+            {{ form.employee }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.status.label_tag }}
+            {{ form.status }}
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Save Attendance
+        </button>
+        <a href="/attendance/" class="btn btn-secondary">
+            Back
+        </a>
+    </form>
+</div>
+{% endblock %}
